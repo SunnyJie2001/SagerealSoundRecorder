@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.sagereal.sagerealsoundrecorder'
-    compileSdk 32
+    compileSdk 29
 
     defaultConfig {
         applicationId "com.sagereal.sagerealsoundrecorder"
-        minSdk 29
-        targetSdk 32
+        minSdk 21
+        targetSdk 29
         versionCode 1
         versionName "1.0"
 
