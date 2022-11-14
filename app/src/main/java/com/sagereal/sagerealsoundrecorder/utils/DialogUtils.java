@@ -1,4 +1,4 @@
-package com.sagereal.sagerealsoundrecorder;
+package com.sagereal.sagerealsoundrecorder.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;

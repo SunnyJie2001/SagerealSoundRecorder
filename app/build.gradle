@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.sagereal.sagerealsoundrecorder'
-    compileSdk 29
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.sagereal.sagerealsoundrecorder"
@@ -14,6 +14,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures{
+        viewBinding true
     }
 
     buildTypes {
