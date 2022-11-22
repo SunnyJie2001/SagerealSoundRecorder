@@ -10,8 +10,12 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
+import com.sagereal.sagerealsoundrecorder.utils.Contants;
+import com.sagereal.sagerealsoundrecorder.utils.IFieInter;
 import com.sagereal.sagerealsoundrecorder.utils.PermissionUtils;
+import com.sagereal.sagerealsoundrecorder.utils.SDCardUtils;
 
+import java.io.File;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         public void onGranted() {
             //判断是否有应用文件夹，如果没有就创建应用文件夹
 
+            createAppDir();
             //倒计时进入播放录音界面
             handler.sendEmptyMessageDelayed(1,1000);
         }
@@ -62,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
                     .showDialogTipUserGotoAppSetting(MainActivity.this);
         }
     };
+
+    private void createAppDir() {
+        File recoderDir = SDCardUtils.getInstance().createAppFetchDir(IFieInter.FETCH_DIR_AUDIO);
+        Contants.PATH_FETCH_DIR_RECORD = recoderDir.getAbsolutePath();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
