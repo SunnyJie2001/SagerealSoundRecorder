@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.sagereal.sagerealsoundrecorder.audio.AudioListActivity;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
 import com.sagereal.sagerealsoundrecorder.utils.Contants;
 import com.sagereal.sagerealsoundrecorder.utils.IFieInter;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             if (msg.what== 1) {
                 time--;
                 if (time==0){
-                    startActivity(new Intent(MainActivity.this,AudioListActivity.class));
+                    startActivity(new Intent(MainActivity.this, AudioListActivity.class));
                     finish();
                 }else {
                     binding.mainTv.setText(time+"");
