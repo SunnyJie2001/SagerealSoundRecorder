@@ -16,6 +16,8 @@ import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoUtils;
 import com.sagereal.sagerealsoundrecorder.utils.Contants;
+import com.sagereal.sagerealsoundrecorder.utils.DialogUtils;
+import com.sagereal.sagerealsoundrecorder.utils.RenameDialog;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -73,16 +75,87 @@ public class AudioListActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_info:
+                        showFileInfoDialog(position);
                         break;
                     case R.id.menu_del:
+                        deleteFileByPos(position);
                         break;
                     case R.id.menu_rename:
+                        showRenameDialog(position);
                         break;
                 }
                 return false;
             }
         });
         popupMenu.show();
+    }
+
+    private void showFileInfoDialog(int position) {
+    }
+
+    /**
+     * 显示重命名对话框
+     * @param position
+     */
+    private void showRenameDialog(int position) {
+        AudioBean bean = mDatas.get(position);
+        String title = bean.getTitle();
+        RenameDialog dialog = new RenameDialog(this);
+        dialog.show();
+        dialog.setDialogWidth();
+        dialog.setTipText(title);
+        dialog.setOnEnsureListener(new RenameDialog.OnEnsureListener() {
+            @Override
+            public void onEnsure(String msg) {
+                renameByPosition(msg,position);
+            }
+        });
+    }
+
+    /**
+     * 对于指定位置的文件重新命名
+     * @param msg
+     * @param position
+     */
+    private void renameByPosition(String msg, int position) {
+        AudioBean audioBean = mDatas.get(position);
+        if(audioBean.getTitle().equals(msg)){
+            return;
+        }
+        String path = audioBean.getPath();
+        String fileSuffix = audioBean.getFileSuffix();
+        File srcFile = new File(path); //原来的文件
+
+        //获取修改路径
+        String destPath = srcFile.getParent()+File.separator+msg+fileSuffix;
+        File destFile = new File(destPath);
+
+        //进行重命名物理操作
+        srcFile.renameTo(destFile);
+        //从内存中修改
+        audioBean.setTitle(msg);
+        audioBean.setPath(destPath);
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 删除指定位置的文件
+     * @param position
+     */
+    private void deleteFileByPos(int position) {
+        AudioBean bean = mDatas.get(position);
+        String title = bean.getTitle();
+        String path = bean.getPath();
+        DialogUtils.showNormalDialog(this, "提示信息", "删除文件后将无法回复，是否确定删除指定文件？"
+                , "确定", new DialogUtils.OnLeftClickListener() {
+                    @Override
+                    public void onLeftClick() {
+                        File file = new File(path);
+                        file.getAbsoluteFile().delete();//物理删除文件，文件彻底消息
+                        mDatas.remove(bean);
+                        adapter.notifyDataSetChanged();
+                    }
+                }, "取消", null);
     }
 
     //点击每一个播放按钮会回调的方法

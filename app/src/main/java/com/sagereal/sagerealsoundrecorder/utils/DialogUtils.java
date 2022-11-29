@@ -11,14 +11,14 @@ import android.content.DialogInterface;
  */
 public class DialogUtils {
 
-    public interface OnLeftCliclListener{
+    public interface OnLeftClickListener{
         public void onLeftClick();
     }
-    public interface OnRightCliclListener{
+    public interface OnRightClickListener{
         public void onRightClick();
     }
 
-    public static void showNormalDialog(Context context,String title,String msg,String leftBtn,OnLeftCliclListener leftListener,String rightBtn,OnRightCliclListener rightListener){
+    public static void showNormalDialog(Context context,String title,String msg,String leftBtn,OnLeftClickListener leftListener,String rightBtn,OnRightClickListener rightListener){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title).setMessage(msg);
         builder.setNegativeButton(leftBtn, new DialogInterface.OnClickListener() {
@@ -26,6 +26,7 @@ public class DialogUtils {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (leftListener!=null){
                     leftListener.onLeftClick();
+                    dialogInterface.cancel();
                 }
             }
         });
@@ -34,6 +35,7 @@ public class DialogUtils {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (rightListener!=null) {
                     rightListener.onRightClick();
+                    dialogInterface.cancel();
                 }
             }
         });
