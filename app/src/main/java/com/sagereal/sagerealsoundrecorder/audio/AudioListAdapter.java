@@ -21,6 +21,15 @@ import java.util.List;
 public class AudioListAdapter extends BaseAdapter {
     private Context context;
     private List<AudioBean> mDatas;
+    //点击每一个itemView当中的playIv能够回调的接口
+    public interface OnItemPlayClickListener{
+        void onItemPlayClick(AudioListAdapter adapter,View convertView,View playView,int position);
+    }
+    private OnItemPlayClickListener onItemPlayClickListener;
+
+    public void setOnItemPlayClickListener(OnItemPlayClickListener onItemPlayClickListener) {
+        this.onItemPlayClickListener = onItemPlayClickListener;
+    }
 
     public AudioListAdapter(Context context, List<AudioBean> mDatas) {
         this.context = context;
@@ -33,27 +42,27 @@ public class AudioListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return mDatas.get(i);
+    public Object getItem(int position) {
+        return mDatas.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
         ViewHolder holder =null;
-        if (view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_audio,viewGroup,false);
-            holder = new ViewHolder(view);
-            view.setTag(holder);
+        if (convertView == null){
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_audio,viewGroup,false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
         }else {
-            holder = (ViewHolder) view.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
         //获取指定位置的数据对于控件进行设置
-        AudioBean audioBean = mDatas.get(i);
+        AudioBean audioBean = mDatas.get(position);
         holder.ab.tvTime.setText(audioBean.getTime());
         holder.ab.tvDuration.setText(audioBean.getDuration());
         holder.ab.tvTitle.setText(audioBean.getTitle());
@@ -67,8 +76,17 @@ public class AudioListAdapter extends BaseAdapter {
             holder.ab.ivPlay.setImageResource(R.mipmap.red_play);
             holder.ab.lvControll.setVisibility(View.GONE);
         }
+        View itemView =convertView;
         //点击播放图标可以播放或者暂停录音内容
-        return view;
+        holder.ab.ivPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemPlayClickListener !=null) {
+                    onItemPlayClickListener.onItemPlayClick(AudioListAdapter.this,itemView,v,position);
+                }
+            }
+        });
+        return convertView;
     }
 
     class ViewHolder{
