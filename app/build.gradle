@@ -4,7 +4,8 @@ plugins {
 
 android {
     namespace 'com.sagereal.sagerealsoundrecorder'
-    compileSdk 31
+    compileSdk 29
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.sagereal.sagerealsoundrecorder"
@@ -34,10 +35,11 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    implementation 'com.carlos.voiceline:mylibrary:1.0.6'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

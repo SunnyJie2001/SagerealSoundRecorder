@@ -17,10 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SagerealSoundRecorder"
         tools:targetApi="31">
+        <activity
+            android:name=".RecoderActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <service
-            android:name=".AudioService"
+            android:name=".audio.AudioService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".audio.AudioListActivity"

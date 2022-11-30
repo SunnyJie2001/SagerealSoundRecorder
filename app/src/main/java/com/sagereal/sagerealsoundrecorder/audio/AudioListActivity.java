@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,13 +17,14 @@ import android.widget.PopupMenu;
 
 import com.sagereal.sagerealsoundrecorder.R;
 import com.sagereal.sagerealsoundrecorder.bean.AudioBean;
-import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
-import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
+//import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
+//import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoDialog;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoUtils;
 import com.sagereal.sagerealsoundrecorder.utils.Contants;
 import com.sagereal.sagerealsoundrecorder.utils.DialogUtils;
 import com.sagereal.sagerealsoundrecorder.utils.RenameDialog;
+import com.sagereal.sagerealsoundrecorder.utils.StartSystemPageUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -33,7 +35,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AudioListActivity extends AppCompatActivity {
-    private ActivityAudioListBinding binding;
+    //private ActivityAudioListBinding binding;
     private List<AudioBean> mDatas;
     private AudioListAdapter adapter;
     private AudioService audioService;
@@ -61,8 +63,8 @@ public class AudioListActivity extends AppCompatActivity {
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAudioListBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        //binding = ActivityAudioListBinding.inflate(getLayoutInflater());
+        //setContentView(binding.getRoot());
 
         Intent intent = new Intent(this,AudioService.class);
         bindService(intent,connection,BIND_AUTO_CREATE);
@@ -70,14 +72,32 @@ public class AudioListActivity extends AppCompatActivity {
         //为ListView设置数据源和适配器
         mDatas = new ArrayList<>();
         adapter = new AudioListAdapter(this,mDatas);
-        binding.audioLv.setAdapter(adapter);
+        //binding.audioLv.setAdapter(adapter);
         //将音频对象集合保存到全局变量
         Contants.setsAudioList(mDatas);
         //加载数据
         loadDatas();
-
         //设置监听时间
         setEvents();
+    }
+
+    /**
+     * 解绑服务
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //判断点击了返回按钮
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            StartSystemPageUtils.goToHomePage(this);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /**
@@ -85,8 +105,22 @@ public class AudioListActivity extends AppCompatActivity {
      */
     private void setEvents() {
         adapter.setOnItemPlayClickListener(playClickListener);
-        binding.audioLv.setOnItemLongClickListener(longClickListener);
+        //binding.audioLv.setOnItemLongClickListener(longClickListener);
+        //binding.audioIb.setOnClickListener(onClickListener);
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //1、关闭音乐
+            audioService.closeMusic();
+            //2、跳转到录音界面
+            //startActivity(new Intent(AudioListActivity.this, RecorderActivity.class));
+            //3、销毁当前的activity
+            finish();
+        }
+    };
+
     AdapterView.OnItemLongClickListener longClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

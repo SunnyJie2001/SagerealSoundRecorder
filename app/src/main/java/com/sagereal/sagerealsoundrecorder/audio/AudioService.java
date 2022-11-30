@@ -322,9 +322,7 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
     private boolean flag = true;
     private final int PROGRESS_ID = 1;
     private final int INTERMINATE_TIME = 1000;
-    public void setFlagControlThread(boolean flag){
-        this.flag = flag;
-    }
+    public void setFlagControlThread(boolean flag){this.flag = flag;}
     public void updateProgress(){
         new Thread(new Runnable() {
             @Override
@@ -354,7 +352,7 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
             if (msg.what == PROGRESS_ID){
                 notifyActivityRefreshUI();
             }
-            return false;
+            return true;
         }
     });
 }
