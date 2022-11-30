@@ -2,7 +2,11 @@ package com.sagereal.sagerealsoundrecorder.audio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.Gravity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,16 +36,43 @@ public class AudioListActivity extends AppCompatActivity {
     private ActivityAudioListBinding binding;
     private List<AudioBean> mDatas;
     private AudioListAdapter adapter;
-    @Override
+    private AudioService audioService;
+    ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            AudioService.AudioBinder audioBinder = (AudioService.AudioBinder)service;
+            audioService = audioBinder.getService();
+            audioService.setOnPlayChangeListener(playChangeListener);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+    AudioService.OnPlayChangeListener playChangeListener = new AudioService.OnPlayChangeListener() {
+        @Override
+        public void playChange(int changPos) {
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAudioListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Intent intent = new Intent(this,AudioService.class);
+        bindService(intent,connection,BIND_AUTO_CREATE);
+
         //为ListView设置数据源和适配器
         mDatas = new ArrayList<>();
         adapter = new AudioListAdapter(this,mDatas);
         binding.audioLv.setAdapter(adapter);
+        //将音频对象集合保存到全局变量
+        Contants.setsAudioList(mDatas);
         //加载数据
         loadDatas();
 
@@ -61,6 +92,25 @@ public class AudioListActivity extends AppCompatActivity {
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             showPopMenu(view,position);
             return false;
+        }
+    };
+
+    //点击每一个播放按钮会回调的方法
+    AudioListAdapter.OnItemPlayClickListener playClickListener = new AudioListAdapter.OnItemPlayClickListener() {
+        @Override
+        public void onItemPlayClick(AudioListAdapter adapter, View convertView, View playView, int position) {
+            for(int i =0;i< mDatas.size();i++){
+                if(i==position){
+                    continue;
+                }
+                AudioBean bean = mDatas.get(i);
+                bean.setPlaying(false);
+            }
+            //获取当前条目录播放状态
+            boolean playing = mDatas.get(position).isPlaying();
+            mDatas.get(position).setPlaying(!playing);
+            adapter.notifyDataSetChanged();
+            audioService.cutMusicOrPause(position);
         }
     };
 
@@ -169,12 +219,7 @@ public class AudioListActivity extends AppCompatActivity {
                 }, "取消", null);
     }
 
-    //点击每一个播放按钮会回调的方法
-    AudioListAdapter.OnItemPlayClickListener playClickListener = new AudioListAdapter.OnItemPlayClickListener() {
-        @Override
-        public void onItemPlayClick(AudioListAdapter adapter, View convertView, View playView, int position) {
-        }
-    };
+
 
     private void loadDatas(){
         //1.获取指定路径下的音频文件
