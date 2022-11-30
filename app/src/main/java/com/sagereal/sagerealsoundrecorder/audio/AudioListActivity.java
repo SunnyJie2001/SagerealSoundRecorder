@@ -14,6 +14,7 @@ import com.sagereal.sagerealsoundrecorder.R;
 import com.sagereal.sagerealsoundrecorder.bean.AudioBean;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
+import com.sagereal.sagerealsoundrecorder.utils.AudioInfoDialog;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoUtils;
 import com.sagereal.sagerealsoundrecorder.utils.Contants;
 import com.sagereal.sagerealsoundrecorder.utils.DialogUtils;
@@ -90,7 +91,17 @@ public class AudioListActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
+    /**
+     * 显示文件详情的对话框
+     * @param position
+     */
     private void showFileInfoDialog(int position) {
+        AudioBean bean =mDatas.get(position);
+        AudioInfoDialog dialog = new AudioInfoDialog(this);
+        dialog.show();
+        dialog.setDialogWidth();
+        dialog.setInfo(bean);
+        dialog.setCanceledOnTouchOutside(false);
     }
 
     /**
