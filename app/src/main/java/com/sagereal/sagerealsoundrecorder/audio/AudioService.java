@@ -352,7 +352,7 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
             if (msg.what == PROGRESS_ID){
                 notifyActivityRefreshUI();
             }
-            return true;
+            return false;
         }
     });
 }

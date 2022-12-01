@@ -19,6 +19,7 @@ import com.sagereal.sagerealsoundrecorder.R;
 import com.sagereal.sagerealsoundrecorder.bean.AudioBean;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
+import com.sagereal.sagerealsoundrecorder.recoder.RecorderActivity;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoDialog;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoUtils;
 import com.sagereal.sagerealsoundrecorder.utils.Contants;
@@ -115,7 +116,7 @@ public class AudioListActivity extends AppCompatActivity {
             //1、关闭音乐
             audioService.closeMusic();
             //2、跳转到录音界面
-            //startActivity(new Intent(AudioListActivity.this, RecorderActivity.class));
+            startActivity(new Intent(AudioListActivity.this, RecorderActivity.class));
             //3、销毁当前的activity
             finish();
         }

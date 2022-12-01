@@ -77,11 +77,12 @@ public class PermissionUtils {
         }
     }
 
-    /*
+    /**
      * 提示用户去应用设置页面手动开启权限
-     */
+     **/
     public void showDialogTipUserGotoAppSetting(Activity context){
-        DialogUtils.showNormalDialog(context, "提示信息", "已禁用权限，请手动开启", "取消", new DialogUtils.OnLeftClickListener() {
+        DialogUtils.showNormalDialog(context, "提示信息", "已禁用权限，请手动开启",
+                "取消", new DialogUtils.OnLeftClickListener() {
             @Override
             public void onLeftClick() {
                 context.finish();
