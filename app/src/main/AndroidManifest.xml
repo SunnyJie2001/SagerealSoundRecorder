@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -17,9 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SagerealSoundRecorder"
         tools:targetApi="31">
+        <service
+            android:name=".recoder.RecorderService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
-            android:name=".RecoderActivity"
-            android:exported="false">
+            android:name=".recoder.RecorderActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

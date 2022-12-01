@@ -17,8 +17,8 @@ import android.widget.PopupMenu;
 
 import com.sagereal.sagerealsoundrecorder.R;
 import com.sagereal.sagerealsoundrecorder.bean.AudioBean;
-//import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
-//import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
+import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
+import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoDialog;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoUtils;
 import com.sagereal.sagerealsoundrecorder.utils.Contants;
@@ -35,7 +35,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AudioListActivity extends AppCompatActivity {
-    //private ActivityAudioListBinding binding;
+    private ActivityAudioListBinding binding;
     private List<AudioBean> mDatas;
     private AudioListAdapter adapter;
     private AudioService audioService;
@@ -63,8 +63,8 @@ public class AudioListActivity extends AppCompatActivity {
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //binding = ActivityAudioListBinding.inflate(getLayoutInflater());
-        //setContentView(binding.getRoot());
+        binding = ActivityAudioListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Intent intent = new Intent(this,AudioService.class);
         bindService(intent,connection,BIND_AUTO_CREATE);
@@ -72,7 +72,7 @@ public class AudioListActivity extends AppCompatActivity {
         //为ListView设置数据源和适配器
         mDatas = new ArrayList<>();
         adapter = new AudioListAdapter(this,mDatas);
-        //binding.audioLv.setAdapter(adapter);
+        binding.audioLv.setAdapter(adapter);
         //将音频对象集合保存到全局变量
         Contants.setsAudioList(mDatas);
         //加载数据
@@ -105,8 +105,8 @@ public class AudioListActivity extends AppCompatActivity {
      */
     private void setEvents() {
         adapter.setOnItemPlayClickListener(playClickListener);
-        //binding.audioLv.setOnItemLongClickListener(longClickListener);
-        //binding.audioIb.setOnClickListener(onClickListener);
+        binding.audioLv.setOnItemLongClickListener(longClickListener);
+        binding.audioIb.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
