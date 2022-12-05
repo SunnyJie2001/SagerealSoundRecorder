@@ -126,6 +126,7 @@ public class AudioListActivity extends AppCompatActivity {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             showPopMenu(view,position);
+            audioService.closeMusic();
             return false;
         }
     };
@@ -265,7 +266,7 @@ public class AudioListActivity extends AppCompatActivity {
                 if (new File(dir,name).isDirectory()) {
                     return false;
                 }
-                if (name.endsWith(".mp3") || name.endsWith(".amr")) {
+                if (name.endsWith(".mp3") || name.endsWith(".amr")||name.endsWith(".wav")||name.endsWith(".aac")) {
                     return true;
                 }
                 return false;
