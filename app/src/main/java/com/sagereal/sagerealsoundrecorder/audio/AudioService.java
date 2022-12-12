@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.Handler;
@@ -33,6 +34,8 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
     private NotificationManager manager;
     private final int NOTIFY_ID_MUSIC = 100;
 
+    AudioManager audioManager;
+
     /**
      * 接收通知发出的广播action
      */
@@ -54,6 +57,7 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
         initRegisterReceiver();
         initRemoteView();
         initNotification();
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
     }
 
     /**
@@ -266,6 +270,29 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
         }
         notifyActivityRefreshUI();
         updateNotification(playPosition);
+    }
+
+    /**
+     * 切换到外放
+     */
+    public void changeToSpeaker() {
+        audioManager.setMode(AudioManager.MODE_NORMAL);
+        audioManager.setSpeakerphoneOn(true);
+    }
+
+
+    /**
+     * 切换到听筒
+     */
+    private void setSpeakerphoneOn(boolean on) {
+        if(on) {
+            audioManager.setSpeakerphoneOn(true);
+        } else {
+            audioManager.setSpeakerphoneOn(false);//关闭扬声器
+            audioManager.setRouting(AudioManager.MODE_NORMAL, AudioManager.ROUTE_EARPIECE, AudioManager.ROUTE_ALL);
+            //把声音设定成Earpiece（听筒）出来，设定为正在通话中
+            audioManager.setMode(AudioManager.MODE_IN_CALL);
+        }
     }
 
     /**

@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RecorderService extends Service {
+public class   RecorderService extends Service {
     private MediaRecorder recorder;
     private boolean isAlive = false;
     private String recorderDirpath;//存放录音文件的公共目录
@@ -180,13 +180,31 @@ public class RecorderService extends Service {
     private void setRecorder() {
         //设置获取麦克风的声音；
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        //设置输出格式
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_WB);
-        //设置编码格式
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+        String type = getSharedPreferences("config", MODE_PRIVATE).getString("voiceType", "amr");
+        File file;
+
         //设置录制的输出文件
         String time = sdf.format(new Date());
-        File file = new File(recorderDirpath,time+".amr");
+        if(type.equals("aac")){
+            //设置输出格式
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
+            //设置编码格式
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            file = new File(recorderDirpath,time+".aac");
+        }else if(type.equals("mp3")){
+            //设置输出格式
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            //设置编码格式
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+            file = new File(recorderDirpath,time+".mp3");
+        }else{
+            //设置输出格式
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_WB);
+            //设置编码格式
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+            file = new File(recorderDirpath,time+".amr");
+        }
+
         if (!file.exists()) {
             try {
                 file.createNewFile();

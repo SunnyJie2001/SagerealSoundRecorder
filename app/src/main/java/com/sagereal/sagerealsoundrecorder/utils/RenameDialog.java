@@ -28,6 +28,8 @@ public class RenameDialog extends Dialog implements View.OnClickListener{
     //创建点击确定执行的接口函数
     public interface OnEnsureListener{
         public void onEnsure(String msg); //填进去的重命名名称
+
+        void onUnsure(String msg);
     }
     OnEnsureListener onEnsureListener;
 

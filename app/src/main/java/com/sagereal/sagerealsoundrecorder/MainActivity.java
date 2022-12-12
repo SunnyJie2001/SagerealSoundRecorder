@@ -20,9 +20,9 @@ import java.io.File;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    /*
+    /**
     * 权限的申请
-    * */
+    **/
     private ActivityMainBinding binding;
     private int time = 3;//倒计时时间
     String[] permissions = {Manifest.permission.RECORD_AUDIO,

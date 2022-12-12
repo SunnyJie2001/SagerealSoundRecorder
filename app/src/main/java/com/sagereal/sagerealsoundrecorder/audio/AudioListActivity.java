@@ -20,6 +20,7 @@ import com.sagereal.sagerealsoundrecorder.bean.AudioBean;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityAudioListBinding;
 import com.sagereal.sagerealsoundrecorder.databinding.ActivityMainBinding;
 import com.sagereal.sagerealsoundrecorder.recoder.RecorderActivity;
+import com.sagereal.sagerealsoundrecorder.setting.SettingActivity;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoDialog;
 import com.sagereal.sagerealsoundrecorder.utils.AudioInfoUtils;
 import com.sagereal.sagerealsoundrecorder.utils.Contants;
@@ -80,6 +81,13 @@ public class AudioListActivity extends AppCompatActivity {
         loadDatas();
         //设置监听时间
         setEvents();
+
+        findViewById(R.id.setting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AudioListActivity.this, SettingActivity.class));
+            }
+        });
     }
 
     /**
@@ -206,6 +214,11 @@ public class AudioListActivity extends AppCompatActivity {
             public void onEnsure(String msg) {
                 renameByPosition(msg,position);
             }
+
+            @Override
+            public void onUnsure(String msg) {
+
+            }
         });
     }
 
@@ -266,7 +279,7 @@ public class AudioListActivity extends AppCompatActivity {
                 if (new File(dir,name).isDirectory()) {
                     return false;
                 }
-                if (name.endsWith(".mp3") || name.endsWith(".amr")||name.endsWith(".wav")||name.endsWith(".aac")) {
+                if (name.endsWith(".mp3") || name.endsWith(".amr")||name.endsWith(".m4a")||name.endsWith(".aac")) {
                     return true;
                 }
                 return false;

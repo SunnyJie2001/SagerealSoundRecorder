@@ -6,11 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/grey">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/audio_tbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/app_name"/>
+        app:title="@string/app_name">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:id="@+id/setting"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_settings_24" />
+
+    </androidx.appcompat.widget.Toolbar>
     <ListView
         android:id="@+id/audio_lv"
         android:layout_width="match_parent"
