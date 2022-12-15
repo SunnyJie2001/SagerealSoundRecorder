@@ -54,6 +54,10 @@ public class RenameDialog extends Dialog implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.dialog_rename_btn_cancel:
+                if (onEnsureListener != null) {
+                    String msg = binding.dialogRenameEt.getText().toString().trim();
+                    onEnsureListener.onUnsure(msg);
+                }
                 cancel();
                 break;
             case R.id.dialog_rename_btn_ensure:

@@ -31,7 +31,7 @@
       android:layout_width="match_parent"
       android:layout_height="260dp"
       android:layout_below="@+id/layout_title"
-      android:layout_marginTop="93dp"
+      android:layout_marginTop="-8dp"
       android:background="@color/white"
       app:fineness="three"
       app:maxVolume="200"
@@ -59,6 +59,9 @@
       android:layout_alignParentBottom="true"
       android:src="@mipmap/red_stop"
       android:layout_centerHorizontal="true"
-      android:layout_margin="5dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginTop="5dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginBottom="5dp"
       android:onClick="onClick"/>
 </RelativeLayout>

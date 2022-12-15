@@ -21,11 +21,11 @@
             android:id="@+id/tv_mc"
             style="@style/nametv_dialoginfo"
             android:text="名称:"
-            android:layout_marginTop="20dp"
             android:layout_below="@+id/tv_detail"/>
         <TextView
             android:id="@+id/tv_title"
             style="@style/nametv_dialoginfo"
+            android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/tv_mc"
             android:layout_alignBottom="@id/tv_mc"
             android:text="20221130_1135.amr"/>
