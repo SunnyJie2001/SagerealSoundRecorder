@@ -12,13 +12,13 @@
         android:icon="@mipmap/icon_app_logo"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/icon_app_logo"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SagerealSoundRecorder">
         <service
             android:name=".recoder.RecorderService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
 
         <activity
             android:name=".recoder.RecorderActivity"
@@ -33,9 +33,7 @@
 
         <activity
             android:name=".audio.AudioListActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -45,7 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".setting.SettingActivity" android:launchMode="singleTop" android:theme="@style/Theme.AppCompat.Light" />
+        <activity android:name=".setting.SettingActivity" android:launchMode="singleTop"/>
     </application>
 
 </manifest>

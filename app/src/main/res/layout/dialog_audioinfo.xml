@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="30dp">
+    app:cardCornerRadius="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,13 +14,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_detail"
             android:text="详情"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/tv_mc"
             style="@style/nametv_dialoginfo"
             android:text="名称:"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/tv_detail"/>
         <TextView
             android:id="@+id/tv_title"
@@ -75,7 +76,7 @@
             android:layout_below="@id/tv_path"
             android:layout_marginTop="30dp"
             android:text="关闭"
-            android:textColor="@color/purple_700"
+            android:textColor="#6D7793"
             android:textSize="20sp"
             android:gravity="center"/>
 

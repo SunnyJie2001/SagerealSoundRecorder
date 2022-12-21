@@ -9,33 +9,37 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:text="20220102_211622"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="20221018_1000"/>
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2022/10/18"
         android:layout_below="@id/tv_title"
         android:layout_marginTop="5dp"
-        android:textSize="16sp"/>
+        android:text="2022/01/02"
+        android:textSize="14dp" />
+
     <ImageView
         android:id="@+id/iv_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/tv_time"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/red_play"/>
+        android:src="@drawable/ic_baseline_play_circle_outline_24" />
+
     <TextView
         android:id="@+id/tv_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/tv_time"
-        android:layout_toLeftOf="@+id/iv_play"
         android:layout_marginRight="10dp"
-        android:text="00:00:21"/>
+        android:layout_toLeftOf="@id/iv_play"
+        android:text="00:00:21" />
+
     <LinearLayout
         android:id="@+id/lv_controll"
         android:layout_width="match_parent"
@@ -43,11 +47,12 @@
         android:layout_below="@id/iv_play"
         android:orientation="horizontal"
         android:visibility="visible">
+
         <ProgressBar
             android:id="@+id/pb"
+            style="@style/MyProgressBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            style="?android:attr/progressBarStyleHorizontal"/>
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 </RelativeLayout>

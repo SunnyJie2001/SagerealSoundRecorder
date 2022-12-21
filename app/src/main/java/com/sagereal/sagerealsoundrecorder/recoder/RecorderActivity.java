@@ -1,5 +1,6 @@
 package com.sagereal.sagerealsoundrecorder.recoder;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
@@ -8,6 +9,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -58,15 +60,23 @@ public class RecorderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRecoderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         Intent intent = new Intent(this,RecorderService.class);
         bindService(intent,connection,BIND_AUTO_CREATE);
+        setSupportActionBar( binding.audioTbar);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.iv_back:
-                StartSystemPageUtils.goToHomePage(this);
-                break;
+//            case R.id.iv_back:
+//                StartSystemPageUtils.goToHomePage(this);
+//                break;
             case R.id.iv_stop:
                 recorderService.stopRecorder();
                 boolean rename = getSharedPreferences("config", MODE_PRIVATE).getBoolean("rename", false);

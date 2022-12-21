@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#FFF5F5F5</color>
+    <color name="switch_thumb_normal">#FFFFFF</color>
+    <color name="switch_track_normal">#01BF04</color>
+    <color name="switch_track_selected">#3FE254</color>
 </resources>

@@ -46,7 +46,7 @@ public class VoiceTypeDialog extends Dialog implements View.OnClickListener{
         //获取屏幕宽度
         Display display = window.getWindowManager().getDefaultDisplay();
         wlp.width = display.getWidth()-30;
-        wlp.gravity = Gravity.CENTER;
+        wlp.gravity = Gravity.BOTTOM;
         //设置窗口背景透明
         window.setBackgroundDrawableResource(android.R.color.transparent);
         //设置窗口参数

@@ -4,35 +4,20 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey">
-  <RelativeLayout
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/audio_tbar"
       android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:id="@+id/layout_title">
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:onClick="onClick"
-        android:src="@mipmap/icon_back"
-        android:layout_marginLeft="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_title"
-        android:layout_centerInParent="true"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="录音"/>
-  </RelativeLayout>
+      android:layout_height="wrap_content"
+      android:background="#fff"
+      android:elevation="1dp"
+      app:title="录音"/>
 
   <com.carlos.voiceline.mylibrary.VoiceLineView
       android:id="@+id/voiceLine"
       android:layout_width="match_parent"
       android:layout_height="260dp"
-      android:layout_below="@+id/layout_title"
-      android:layout_marginTop="-8dp"
-      android:background="@color/white"
+      android:layout_below="@+id/audio_tbar"
+      android:background="@color/grey"
       app:fineness="three"
       app:maxVolume="200"
       app:middleLine="@android:color/holo_red_light"
@@ -42,26 +27,28 @@
       app:voiceLine="@android:color/holo_red_light" />
 
   <TextView
+      android:id="@+id/tv_duration"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/tv_duration"
       android:layout_below="@id/voiceLine"
-      android:textSize="40sp"
-      android:textColor="@color/black"
-      android:textStyle="bold"
       android:gravity="center"
+      android:padding="10dp"
       android:text="00:00:00"
-      android:padding="10dp"/>
+      android:textColor="@color/black"
+      android:textSize="40sp"
+      android:textStyle="bold" />
+
   <ImageView
-      android:layout_width="60dp"
-      android:layout_height="60dp"
       android:id="@+id/iv_stop"
+      android:layout_width="80dp"
+      android:layout_height="80dp"
       android:layout_alignParentBottom="true"
-      android:src="@mipmap/red_stop"
       android:layout_centerHorizontal="true"
       android:layout_marginStart="5dp"
       android:layout_marginTop="5dp"
       android:layout_marginEnd="5dp"
+      android:scaleType="centerCrop"
       android:layout_marginBottom="5dp"
-      android:onClick="onClick"/>
+      android:onClick="onClick"
+      android:src="@drawable/ic_record" />
 </RelativeLayout>

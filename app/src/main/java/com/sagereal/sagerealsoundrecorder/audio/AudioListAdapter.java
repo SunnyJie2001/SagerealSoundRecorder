@@ -71,9 +71,9 @@ public class AudioListAdapter extends BaseAdapter {
             holder.ab.lvControll.setVisibility(View.VISIBLE);
             holder.ab.pb.setMax(100);
             holder.ab.pb.setProgress(audioBean.getCurrentProgress());
-            holder.ab.ivPlay.setImageResource(R.mipmap.red_pause);
+            holder.ab.ivPlay.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24);
         }else {
-            holder.ab.ivPlay.setImageResource(R.mipmap.red_play);
+            holder.ab.ivPlay.setImageResource(R.drawable.ic_baseline_play_circle_outline_24);
             holder.ab.lvControll.setVisibility(View.GONE);
         }
         View itemView =convertView;
