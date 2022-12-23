@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sagereal.sagerealsoundrecorder.databinding.ActSettingBinding;
@@ -55,7 +57,15 @@ public class SettingActivity extends AppCompatActivity {
                 voiceTypeDialog.show();
             }
         });
+        setSupportActionBar( binding.audioTbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

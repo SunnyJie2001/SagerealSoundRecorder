@@ -37,7 +37,7 @@ public class SDCardUtils {
         if (isHaveSDCard()) {
             File sdDir = Environment.getExternalStorageDirectory();
             File addDir = new File(sdDir,IFieInter.APP_DIR);
-            if (!addDir.exists()) {
+            if (!addDir.mkdir()) {
                 addDir.mkdir();
             }
             Contants.PATH_APP_DIR = addDir.getAbsolutePath();

@@ -30,11 +30,13 @@
         android:divider="@null"
         android:dividerHeight="10dp"
         android:padding="10dp"/>
-    <ImageButton
+    <ImageView
         android:id="@+id/audio_ib"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@mipmap/mic_on"
-        android:layout_margin="5dp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_width="50dp"
+        android:background="@drawable/bg_voice"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_voice" />
 </LinearLayout>

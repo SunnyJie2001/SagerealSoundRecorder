@@ -39,10 +39,10 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
     /**
      * 接收通知发出的广播action
      */
-    private final String PRE_ACTION_LAST = "com.ztree.last";
-    private final String PRE_ACTION_PLAY = "com.ztree.play";
-    private final String PRE_ACTION_NEXT = "com.ztree.next";
-    private final String PRE_ACTION_CLOSE = "com.ztree.close";
+    private final String PRE_ACTION_LAST = "com.sagereal.last";
+    private final String PRE_ACTION_PLAY = "com.sagereal.play";
+    private final String PRE_ACTION_NEXT = "com.sagereal.next";
+    private final String PRE_ACTION_CLOSE = "com.sagereal.close";
     private Notification notification;
 
 
@@ -223,6 +223,11 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
      * @param position
      */
     public void play(int position){
+        if (getSharedPreferences("config", MODE_PRIVATE).getBoolean("soundMode", false)) {
+            setSpeakerphoneOn(false);
+        } else {
+            setSpeakerphoneOn(true);
+        }
         if(mediaPlayer==null){
             mediaPlayer = new MediaPlayer();
             //设置监听音乐

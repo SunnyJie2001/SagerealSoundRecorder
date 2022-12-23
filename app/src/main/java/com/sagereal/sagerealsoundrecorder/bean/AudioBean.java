@@ -46,7 +46,8 @@ public class AudioBean {
         this.fileLength = fileLength;
     }
 
-    public AudioBean() {
+    public AudioBean(String id) {
+        this.id = id;
     }
 
     public String getId() {

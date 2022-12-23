@@ -66,7 +66,7 @@ public class AudioInfoDialog extends Dialog {
     }
 
     private String calFileSize(long fileLength) {
-        DecimalFormat format = new DecimalFormat("#.00");
+        DecimalFormat format = new DecimalFormat(".00");
         if (fileLength>=1024*1024){
             return format.format(fileLength*1.0/(1024*1024))+"MB";
         }
